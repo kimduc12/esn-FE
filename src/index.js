@@ -1,14 +1,15 @@
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { store } from './app/store';
-import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter } from 'react-router-dom';
-import CssBaseline from '@mui/material/CssBaseline';
 import './index.scss';
+import * as serviceWorker from './serviceWorker';
 
 const theme = createTheme();
 ReactDOM.render(
@@ -17,7 +18,9 @@ ReactDOM.render(
             <Provider store={store}>
                 <BrowserRouter>
                     <CssBaseline />
-                    <App />
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <App />
+                    </LocalizationProvider>
                 </BrowserRouter>
             </Provider>
         </ThemeProvider>

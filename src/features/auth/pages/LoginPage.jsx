@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
         backgroundColor: theme.palette.primary.light,
     },
-    loginWrapper: {
+    wrapper: {
         padding: theme.spacing(2),
     },
-    loginHeading: {
+    heading: {
         textAlign: 'center',
         textTransform: 'uppercase',
     },
@@ -56,8 +56,8 @@ function LoginPage() {
     };
     return (
         <Box className={classes.root}>
-            <Paper elevation={2} className={classes.loginWrapper}>
-                <Typography component="h1" variant="h4" className={classes.loginHeading}>
+            <Paper elevation={2} className={classes.wrapper}>
+                <Typography component="h1" variant="h4" className={classes.heading}>
                     Login
                 </Typography>
                 <LoginForm onSubmit={handleLoginSubmit} />

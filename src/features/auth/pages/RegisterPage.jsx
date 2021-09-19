@@ -2,7 +2,7 @@ import { Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import React from 'react';
-import ForgotPasswordForm from '../components/ForgotPasswordForm';
+import RegisterForm from '../components/RegisterForm';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
     wrapper: {
         padding: theme.spacing(2),
+        width: '30vw',
     },
     heading: {
         textAlign: 'center',
@@ -22,18 +23,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ForgotPasswordPage() {
+function RegisterPage() {
     const classes = useStyles();
     return (
         <Box className={classes.root}>
             <Paper elevation={2} className={classes.wrapper}>
                 <Typography component="h1" variant="h4" className={classes.heading}>
-                    Forgot password
+                    Register
                 </Typography>
-                <ForgotPasswordForm />
+                <RegisterForm />
             </Paper>
         </Box>
     );
 }
 
-export default ForgotPasswordPage;
+export default RegisterPage;
