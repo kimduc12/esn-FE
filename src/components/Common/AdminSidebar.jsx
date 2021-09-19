@@ -1,6 +1,5 @@
-import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
+import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -31,14 +30,6 @@ export function AdminSidebar() {
                             <InboxIcon />
                         </ListItemIcon>
                         <ListItemText primary="Dashboard" />
-                    </ListItem>
-                </NavLink>
-                <NavLink to="/admin/students" className={classes.link}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <DraftsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Students" />
                     </ListItem>
                 </NavLink>
             </List>

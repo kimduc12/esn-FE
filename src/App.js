@@ -1,6 +1,5 @@
-import { NotFound } from 'components/Common';
-import { PrivateRoute } from 'components/Common';
-import { AdminLayout } from 'components/Layout';
+import { NotFound, PrivateRoute } from 'components/Common';
+import { AdminLayout } from 'components/Layout/AdminLayout';
 import AuthFeature from 'features/auth';
 import React from 'react';
 import { Route, Switch } from 'react-router';

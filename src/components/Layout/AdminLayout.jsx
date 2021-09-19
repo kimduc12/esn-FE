@@ -2,8 +2,8 @@ import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import { AdminHeader } from 'components/Common/AdminHeader';
 import { AdminSidebar } from 'components/Common/AdminSidebar';
+import AdminFeature from 'features/admin';
 import React from 'react';
-import { Switch } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,8 +31,9 @@ const useStyles = makeStyles((theme) => ({
 
 export function AdminLayout() {
     const classes = useStyles();
+
     return (
-        <Box>
+        <Box className={classes.root}>
             <Box className={classes.header}>
                 <AdminHeader />
             </Box>
@@ -40,7 +41,7 @@ export function AdminLayout() {
                 <AdminSidebar />
             </Box>
             <Box className={classes.main}>
-                <Switch></Switch>
+                <AdminFeature />
             </Box>
         </Box>
     );
