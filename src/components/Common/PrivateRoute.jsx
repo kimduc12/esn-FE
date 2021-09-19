@@ -27,12 +27,11 @@ export function PrivateRoute(props) {
                     dispatch(authActions.setRoles(res.data.roles));
                     delete res.data.roles;
                     dispatch(authActions.setCurrentUser(res.data));
-                    setLoading(false);
                 } else {
-                    setLoading(false);
                     history.push('/login');
                 }
             }
+            setLoading(false);
         })();
     }, [history, selectUser, dispatch]);
 
