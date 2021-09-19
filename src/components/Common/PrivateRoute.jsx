@@ -16,8 +16,10 @@ export function PrivateRoute(props) {
         (async () => {
             const accessToken = getLSItem('access_token');
             const isLoggedIn = Boolean(accessToken);
-            if (!isLoggedIn) history.push('/login');
-            if (!selectUser) {
+            if (!isLoggedIn) {
+                history.push('/login');
+            }
+            if (isLoggedIn && !selectUser) {
                 const res = await userApi.getUserInfo();
                 if (res.status) {
                     setLSItem('access_token', res.data.accessToken);
