@@ -1,8 +1,8 @@
 import userApi from 'api/userApi';
 import { authActions, selectCurrentUser } from 'features/auth/authSlice';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Route, useHistory } from 'react-router';
+import { Route, useHistory } from 'react-router';
 import { getLSItem, setLSItem } from 'utils';
 import { LoadingOverlay } from './LoadingOverlay';
 
@@ -16,7 +16,7 @@ export function PrivateRoute(props) {
         (async () => {
             const accessToken = getLSItem('access_token');
             const isLoggedIn = Boolean(accessToken);
-            if (!isLoggedIn) return <Redirect to="/login" />;
+            if (!isLoggedIn) history.push('/login');
             if (!selectUser) {
                 const res = await userApi.getUserInfo();
                 if (res.status) {
