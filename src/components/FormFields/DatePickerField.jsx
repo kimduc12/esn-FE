@@ -1,8 +1,8 @@
+import { DatePicker } from '@mui/lab';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useController } from 'react-hook-form';
-import MobileDatePicker from '@mui/lab/MobileDatePicker';
 
 DatePickerField.propTypes = {
     name: PropTypes.string,
@@ -12,26 +12,26 @@ DatePickerField.propTypes = {
 function DatePickerField({ name, label, control, ...inputProps }) {
     const {
         field: { ref, onChange, value },
-        fieldState: { error },
+        fieldState: { invalid, error },
     } = useController({
         name,
         control,
         rules: { required: true },
         defaultValue: '',
     });
-    console.log('error', error);
-    console.log('value', value);
     return (
-        <MobileDatePicker
+        <DatePicker
             name={name}
             label={label}
             value={value}
             onChange={onChange}
             inputRef={ref}
+            inputFormat="yyyy-MM-dd"
+            mask="____-__-__"
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    error={error ? true : false}
+                    error={invalid}
                     fullWidth
                     margin="normal"
                     size="small"

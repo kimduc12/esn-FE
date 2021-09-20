@@ -40,6 +40,7 @@ function LoginPage() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
+
     const handleLoginSubmit = async (formValues) => {
         const res = await userApi.login({
             loginName: formValues.email,

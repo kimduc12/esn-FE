@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import InputField from 'components/FormFields/InputField';
@@ -32,9 +32,9 @@ function LoginForm({ onSubmit }) {
     } = useForm({
         resolver: yupResolver(schema),
     });
-    const handleFormSubmit = (formValues) => {
+    const handleFormSubmit = async (formValues) => {
         if (!onSubmit) return;
-        onSubmit(formValues);
+        await onSubmit(formValues);
     };
 
     return (
@@ -54,7 +54,8 @@ function LoginForm({ onSubmit }) {
                     fullWidth
                     disabled={isSubmitting}
                 >
-                    Login
+                    {isSubmitting && <CircularProgress size={20} color="info" />}
+                    &nbsp; Login
                 </Button>
             </Box>
         </Box>

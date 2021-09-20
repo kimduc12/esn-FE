@@ -11,7 +11,7 @@ InputField.propTypes = {
 function InputField({ name, label, control, ...inputProps }) {
     const {
         field: { ref, onChange, onBlur, value },
-        fieldState: { error },
+        fieldState: { invalid, error },
     } = useController({
         name,
         control,
@@ -20,7 +20,7 @@ function InputField({ name, label, control, ...inputProps }) {
     });
     return (
         <TextField
-            error={error ? true : false}
+            error={invalid}
             name={name}
             fullWidth
             label={label}
