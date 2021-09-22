@@ -8,7 +8,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-ForgotPasswordForm.propTypes = {
+ResetPasswordForm.propTypes = {
     onSubmit: PropTypes.func,
 };
 
@@ -19,10 +19,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ForgotPasswordForm({ onSubmit }) {
+function ResetPasswordForm({ onSubmit }) {
     const classes = useStyles();
     const schema = yup.object().shape({
-        email: yup.string().email('Please enter valid email').required('Please enter email'),
+        password: yup
+            .string()
+            .min(6, 'Min is 6')
+            .max(10, 'Max is 10')
+            .required('Please enter your password'),
+        password_confirmation: yup
+            .string()
+            .oneOf([yup.ref('password'), null], 'Passwords must match'),
     });
     const {
         control,
@@ -42,7 +49,13 @@ function ForgotPasswordForm({ onSubmit }) {
             autoComplete="off"
             onSubmit={handleSubmit(handleFormSubmit)}
         >
-            <InputField name="email" label="Email" control={control} />
+            <InputField type="password" name="password" label="New password" control={control} />
+            <InputField
+                type="password"
+                name="password_confirmation"
+                label="Confirm password"
+                control={control}
+            />
             <Box className={classes.submitButton}>
                 <Button
                     type="submit"
@@ -59,4 +72,4 @@ function ForgotPasswordForm({ onSubmit }) {
     );
 }
 
-export default ForgotPasswordForm;
+export default ResetPasswordForm;

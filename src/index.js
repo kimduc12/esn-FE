@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { store } from './app/store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
@@ -20,6 +22,7 @@ ReactDOM.render(
                     <CssBaseline />
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <App />
+                        <ToastContainer />
                     </LocalizationProvider>
                 </BrowserRouter>
             </Provider>

@@ -1,7 +1,6 @@
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import { AdminHeader } from 'components/Common/AdminHeader';
-import { AdminSidebar } from 'components/Common/AdminSidebar';
+import { AdminHeader, AdminSidebar } from 'components/Common/';
 import AdminFeature from 'features/admin';
 import React from 'react';
 

@@ -6,21 +6,15 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { setLSItem } from 'utils';
 import { authActions } from '../authSlice';
 import LoginForm from '../components/LoginForm';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexFlow: 'row nowrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: theme.palette.primary.light,
-    },
+    root: {},
     wrapper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(4),
     },
     heading: {
         textAlign: 'center',
@@ -53,12 +47,14 @@ function LoginPage() {
             delete res.data.roles;
             dispatch(authActions.setCurrentUser(res.data));
             history.push('/admin');
+        } else {
+            toast.error(res.message);
         }
     };
     return (
         <Box className={classes.root}>
             <Paper elevation={2} className={classes.wrapper}>
-                <Typography component="h1" variant="h4" className={classes.heading}>
+                <Typography component="h2" variant="h5" className={classes.heading}>
                     Login
                 </Typography>
                 <LoginForm onSubmit={handleLoginSubmit} />
