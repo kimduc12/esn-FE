@@ -1,11 +1,13 @@
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import InboxIcon from '@mui/icons-material/Inbox';
-import StarBorder from '@mui/icons-material/StarBorder';
-import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import Collapse from '@mui/material/Collapse';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import SidebarListItem from './Sidebar/SidebarListItem';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSidebarList } from './Sidebar/SidebarSlice';
+import { sidebarActions } from './Sidebar/SidebarSlice';
+import PeopleIcon from '@mui/icons-material/People';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import InboxIcon from '@mui/icons-material/Inbox';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,46 +15,84 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
     },
-    link: {
-        color: 'inherit',
-        textDecoration: 'none',
-        '&.active > div': {
-            backgroundColor: theme.palette.action.selected,
-        },
-    },
 }));
 
 export function AdminSidebar() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const history = useHistory();
+    const match = useRouteMatch();
+    const dispatch = useDispatch();
+    const sidebarList = useSelector(selectSidebarList);
+    const [list, setList] = React.useState([
+        {
+            title: 'Dashboard',
+            url: '/',
+            icon: <InboxIcon />,
+            isActive: true,
+        },
+        {
+            title: 'Users',
+            icon: <PeopleIcon />,
+            isActive: false,
+            isCollapse: false,
+            child: [
+                {
+                    title: 'User List',
+                    url: '/admin/users',
+                    icon: <ManageAccountsIcon />,
+                    isActive: false,
+                },
+            ],
+        },
+    ]);
 
-    const handleClick = () => {
-        setOpen(!open);
+    const handleClickItemRedux = (item, idx) => {
+        // Set isActive all item to false
+        const newList = sidebarList.map((row, i) => {
+            const tmp = { ...row };
+            tmp.isActive = false;
+            if (i === idx) {
+                // Set isActive of clicked item to true
+                tmp.isActive = true;
+                if (tmp.hasOwnProperty('isCollapse')) {
+                    tmp.isCollapse = !tmp.isCollapse;
+                }
+            }
+            return tmp;
+        });
+
+        console.log('newList', newList);
+
+        dispatch(sidebarActions.updateList(newList));
+        if (item.hasOwnProperty('url')) {
+            history.push(item.url);
+        }
+    };
+
+    const handleClickItem = (item, idx) => {
+        // Set isActive all item to false
+        const newList = list.map((row, i) => {
+            const tmp = { ...row };
+            tmp.isActive = false;
+            if (i === idx) {
+                // Set isActive of clicked item to true
+                tmp.isActive = true;
+                if (tmp.hasOwnProperty('isCollapse')) {
+                    tmp.isCollapse = !tmp.isCollapse;
+                }
+            }
+            return tmp;
+        });
+        setList(newList);
+
+        if (item.hasOwnProperty('url')) {
+            history.push(item.url);
+        }
     };
 
     return (
         <div className={classes.root}>
-            <List component="nav">
-                <ListItemButton onClick={handleClick}>
-                    <ListItemIcon>
-                        <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Dashboard" />
-                    {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open}>
-                    <List component="div" disablePadding>
-                        <NavLink to="/admin/dashboard" className={classes.link}>
-                            <ListItemButton sx={{ pl: 4 }}>
-                                <ListItemIcon>
-                                    <StarBorder />
-                                </ListItemIcon>
-                                <ListItemText primary="Starred" />
-                            </ListItemButton>
-                        </NavLink>
-                    </List>
-                </Collapse>
-            </List>
+            <SidebarListItem list={list} onClickItem={handleClickItem} />
         </div>
     );
 }
