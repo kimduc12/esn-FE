@@ -21,6 +21,20 @@ const userApi = {
         const url = '/users/get-my-info';
         return await axiosClient.get(url);
     },
+    async getList(params) {
+        const url = '/users';
+        return await axiosClient.get(url, {
+            params: params
+        });
+    },
+    async delete(ids) {
+        const url = '/users';
+        return await axiosClient.delete(url, {
+            data: {
+                ids: ids
+            }
+        });
+    },
 };
 
 export default userApi;

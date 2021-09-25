@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
     sidebar: {
         gridArea: 'sidebar',
         borderRight: `1px solid ${theme.palette.divider}`,
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: theme.palette.common.white,
     },
     main: {
         gridArea: 'main',
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.palette.grey[200],
         padding: theme.spacing(2, 3),
     },
 }));

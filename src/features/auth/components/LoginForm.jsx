@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, CircularProgress } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import InputField from 'components/FormFields/InputField';
@@ -47,16 +47,16 @@ function LoginForm({ onSubmit }) {
             <InputField name="email" label="Email" control={control} />
             <InputField type="password" name="password" label="Password" control={control} />
             <Box className={classes.submitButton}>
-                <Button
+                <LoadingButton
+                    fullWidth
                     type="submit"
                     color="primary"
+                    loading={isSubmitting}
+                    loadingIndicator="Loading..."
                     variant="contained"
-                    fullWidth
-                    disabled={isSubmitting}
                 >
-                    {isSubmitting && <CircularProgress size={20} color="info" />}
-                    &nbsp; Login
-                </Button>
+                    Login
+                </LoadingButton>
             </Box>
         </Box>
     );

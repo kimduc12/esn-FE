@@ -3,3 +3,4 @@ export * from './NotFound';
 export * from './AdminHeader';
 export * from './AdminSidebar';
 export * from './LoadingOverlay';
+export * from './TablePaginationActions';
