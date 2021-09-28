@@ -8,11 +8,18 @@ import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {},
+    icon: {
+        minWidth: '34px !important',
+    },
     link: {
         textDecoration: 'none',
         color: 'inherit',
         '&.active': {
-            background: 'rgba(0, 0, 0, 0.08)',
+            color: theme.palette.primary.main,
+            fontWeight: '700',
+            '& svg': {
+                color: theme.palette.primary.main,
+            },
         },
     },
 }));
@@ -34,7 +41,7 @@ function SidebarItem(props) {
             return <ListItemButton onClick={onHandleClick}>{children}</ListItemButton>;
         }
 
-        // Return a LitItem with a link component
+        // Return a ListItem with a link component
         return (
             <ListItemButton component={NavLink} exact to={route} className={classes.link}>
                 {children}
@@ -45,11 +52,16 @@ function SidebarItem(props) {
         <>
             <SidebarItemComponent route={route} onHandleClick={handleClick}>
                 {!!Icon && (
-                    <ListItemIcon>
-                        <Icon />
+                    <ListItemIcon className={classes.icon}>
+                        <Icon fontSize="small" />
                     </ListItemIcon>
                 )}
-                <ListItemText primary={title} inset={!Icon} />
+                <ListItemText
+                    disableTypography={true}
+                    primary={title}
+                    inset={!Icon}
+                    sx={{ fontSize: '14px', marginTop: '1px', marginBottom: '0' }}
+                />
                 {isCollapse && !open && <ExpandMore />}
                 {isCollapse && open && <ExpandLess />}
             </SidebarItemComponent>

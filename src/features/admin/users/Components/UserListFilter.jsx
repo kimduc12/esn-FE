@@ -14,7 +14,7 @@ import SelectField from 'components/FormFields/SelectField';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexFlow: 'row nowrap',
+        flexFlow: 'row wrap',
         alignItems: 'center',
     },
     formControl: {

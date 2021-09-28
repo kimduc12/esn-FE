@@ -1,8 +1,7 @@
-import { Button, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import React from 'react';
-import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -14,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export function NotFound() {
+export function AdminNotFound() {
     const classes = useStyles();
-    const history = useHistory();
     return (
         <Box>
             <Paper elevation={2} className={classes.wrapper}>
@@ -36,11 +34,6 @@ export function NotFound() {
                         src="https://material-kit-pro-react.devias.io/static/error/error404_light.svg"
                         alt=""
                     />
-                </Box>
-                <Box align="center" className={classes.center}>
-                    <Button onClick={() => history.push('/')} color="primary" variant="contained">
-                        Back to home
-                    </Button>
                 </Box>
             </Paper>
         </Box>

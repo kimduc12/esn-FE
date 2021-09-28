@@ -109,7 +109,7 @@ function UserListTable({ list, pagination, filter, onFilter, onDelete }) {
                                 <TableCell>
                                     <Chip
                                         label={row.gender ? 'Female' : 'Male'}
-                                        color={!row.status ? 'secondary' : 'primary'}
+                                        color={row.gender ? 'secondary' : 'primary'}
                                         size="small"
                                     />
                                 </TableCell>
@@ -123,11 +123,15 @@ function UserListTable({ list, pagination, filter, onFilter, onDelete }) {
                                         size="small"
                                     />
                                 </TableCell>
-                                <TableCell align="right" className={classes.actions}>
+                                <TableCell
+                                    align="right"
+                                    className={classes.actions}
+                                    style={{ minWidth: '130px' }}
+                                >
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        onClick={() => history.push(`${match.url}/edit`)}
+                                        onClick={() => history.push(`${match.url}/${row.id}`)}
                                     >
                                         <EditIcon />
                                     </Button>

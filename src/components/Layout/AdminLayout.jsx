@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
         gridTemplateAreas: `"header header" "sidebar main"`,
 
         minHeight: '100vh',
+        [theme.breakpoints.down('lg')]: {
+            gridTemplateColumns: 'auto 1fr',
+            gridTemplateAreas: `"header header" "main main"`,
+        },
     },
     header: {
         gridArea: 'header',
@@ -20,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
         gridArea: 'sidebar',
         borderRight: `1px solid ${theme.palette.divider}`,
         backgroundColor: theme.palette.common.white,
+        [theme.breakpoints.down('lg')]: {
+            display: 'none',
+        },
     },
     main: {
         gridArea: 'main',

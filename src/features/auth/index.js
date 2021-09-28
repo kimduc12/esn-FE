@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import { makeStyles } from '@mui/styles';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import { NotFound } from 'components/Common/NotFound';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +45,9 @@ function AuthFeature() {
                 <Route path="/reset-password" component={ResetPasswordPage} />
                 <Route path="/reset-password" component={LoginPage} />
                 <Route path="/register" component={RegisterPage} />
+                <Route>
+                    <NotFound />
+                </Route>
             </Switch>
         </Box>
     );

@@ -27,6 +27,18 @@ const userApi = {
             params: params
         });
     },
+    async get(id) {
+        const url = `/users/${id}`;
+        return await axiosClient.get(url);
+    },
+    async add(data) {
+        const url = `/users`;
+        return await axiosClient.post(url, data);
+    },
+    async update(id, data) {
+        const url = `/users/${id}`;
+        return await axiosClient.put(url, data);
+    },
     async delete(ids) {
         const url = '/users';
         return await axiosClient.delete(url, {

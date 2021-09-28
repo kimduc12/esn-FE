@@ -5,15 +5,13 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import { authActions } from 'features/auth/authSlice';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-import { removeLSItem } from 'utils';
+import TemporaryDrawer from './Drawer/TemporaryDrawer';
+import DesktopMenu from './Menu/DesktopMenu';
+import MobileMenu from './Menu/MobileMenu';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,14 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
 export function AdminHeader() {
     const classes = useStyles();
-    const history = useHistory();
-    const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -55,85 +48,21 @@ export function AdminHeader() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
-    const handleLogout = () => {
-        dispatch(authActions.logout());
-        removeLSItem('access_token');
-        history.push('/login');
-    };
-
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>Account Profile</MenuItem>
-            <MenuItem onClick={handleLogout}>Log out</MenuItem>
-        </Menu>
-    );
-
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-        >
-            <MenuItem>
-                <IconButton size="large" color="inherit">
-                    <Badge badgeContent={4} color="error">
-                        <ShoppingBasketIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton size="large" color="inherit">
-                    <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton size="large" aria-haspopup="true" color="inherit">
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
-        </Menu>
-    );
-
     return (
         <Box className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    <TemporaryDrawer anchor="left">
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    </TemporaryDrawer>
                     <Typography variant="h6" className={classes.title}>
                         ESN Management
                     </Typography>
@@ -166,8 +95,8 @@ export function AdminHeader() {
                     </Box>
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
+            <MobileMenu anchorEl={mobileMoreAnchorEl} onClose={handleMobileMenuClose} />
+            <DesktopMenu anchorEl={anchorEl} onClose={handleMenuClose} />
         </Box>
     );
 }

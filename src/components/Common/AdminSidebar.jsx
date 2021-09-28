@@ -16,21 +16,45 @@ export function AdminSidebar() {
     const classes = useStyles();
     const list = [
         {
-            title: 'Dashboard',
-            route: '/admin',
-            Icon: InboxIcon,
-        },
-        {
-            title: 'Users',
-            Icon: PeopleIcon,
+            title: 'General',
             items: [
                 {
-                    title: 'Add new user',
-                    route: '/admin/users/add',
+                    title: 'Dashboard',
+                    route: '/admin',
+                    Icon: InboxIcon,
+                },
+            ],
+        },
+        {
+            title: 'Management',
+            items: [
+                {
+                    title: 'Admin',
+                    Icon: PeopleIcon,
+                    items: [
+                        {
+                            title: 'Add new admin',
+                            route: '/admin/users/add',
+                        },
+                        {
+                            title: 'Admin List',
+                            route: '/admin/users',
+                        },
+                    ],
                 },
                 {
-                    title: 'User List',
-                    route: '/admin/users',
+                    title: 'Users',
+                    Icon: PeopleIcon,
+                    items: [
+                        {
+                            title: 'Add new user',
+                            route: '/admin/users/add',
+                        },
+                        {
+                            title: 'User List',
+                            route: '/admin/users',
+                        },
+                    ],
                 },
             ],
         },
